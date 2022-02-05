@@ -1,4 +1,6 @@
 <?php 
+declare(strict_types=1); 
+
 require_once 'php/config.php';
 
 /**
@@ -8,10 +10,12 @@ require_once SOURCE_BASE . '/partials/header.php';
 require_once SOURCE_BASE . '/partials/footer.php';
 
 $rpath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
+$method = strtolower($_SERVER['REQUEST_METHOD']);
+// echo $method;
 
-route($rpath);
+route($rpath, $method);
 
-function route($rpath) {
+function route(String $rpath, String $method): void {
   if ($rpath === '') {
     $rpath = 'home';
   }
@@ -22,8 +26,14 @@ function route($rpath) {
     require_once SOURCE_BASE . "/views/404.php";
     return;
   }
-  
+
   require_once $targetFile;
+
+  // Use namespace (\<-escape)\{namespace}(\<-escape)\{$rpath}(\<-escape)\{$method}
+  $fn = "\\controller\\{$rpath}\\{$method}";
+
+  // Execute function
+  $fn();
 }
 
 // if ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/login') {
