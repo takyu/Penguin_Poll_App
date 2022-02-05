@@ -7,12 +7,30 @@ require_once 'php/config.php';
 require_once SOURCE_BASE . '/partials/header.php';
 require_once SOURCE_BASE . '/partials/footer.php';
 
+$rpath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
 
-if ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/login') {
-  require_once SOURCE_BASE . '/controllers/login.php';
-} elseif ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/register') {
-  require_once SOURCE_BASE . '/controllers/register.php';
-} elseif ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/') {
-  require_once SOURCE_BASE . '/controllers/home.php';
+route($rpath);
+
+function route($rpath) {
+  if ($rpath === '') {
+    $rpath = 'home';
+  }
+  
+  $targetFile = SOURCE_BASE . "/controllers/{$rpath}.php";
+  
+  if (!file_exists($targetFile)) {
+    require_once SOURCE_BASE . "/views/404.php";
+    return;
+  }
+  
+  require_once $targetFile;
 }
+
+// if ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/login') {
+//   require_once SOURCE_BASE . '/controllers/login.php';
+// } elseif ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/register') {
+//   require_once SOURCE_BASE . '/controllers/register.php';
+// } elseif ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/') {
+//   require_once SOURCE_BASE . '/controllers/home.php';
+// }
 ?>
