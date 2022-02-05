@@ -4,14 +4,35 @@ declare(strict_types=1);
 require_once 'php/config.php';
 
 /**
+ * dotenv
+ */
+require_once __DIR__ . '/../vendor/autoload.php';
+
+/**
+ * model
+ */
+require_once SOURCE_BASE . '/model/user.model.php';
+
+/**
+ * db
+ */
+require_once SOURCE_BASE . '/db/datasource.php';
+require_once SOURCE_BASE . '/db/setdb.env.php';
+require_once SOURCE_BASE . '/db/user.query.php';
+
+/**
  * partials
  */
 require_once SOURCE_BASE . '/partials/header.php';
 require_once SOURCE_BASE . '/partials/footer.php';
 
+// confirm object about user
+use db\UserQuery;
+$res = UserQuery::fetch_by_id('pensan');
+var_dump($res);
+
 $rpath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
 $method = strtolower($_SERVER['REQUEST_METHOD']);
-// echo $method;
 
 route($rpath, $method);
 
@@ -35,12 +56,4 @@ function route(String $rpath, String $method): void {
   // Execute function
   $fn();
 }
-
-// if ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/login') {
-//   require_once SOURCE_BASE . '/controllers/login.php';
-// } elseif ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/register') {
-//   require_once SOURCE_BASE . '/controllers/register.php';
-// } elseif ($_SERVER['REQUEST_URI'] === '/penguin_pollapp/src/') {
-//   require_once SOURCE_BASE . '/controllers/home.php';
-// }
 ?>
