@@ -9,7 +9,7 @@ use model\UserModel;
 
 class UserQuery
 {
-    public static function fetch_by_id($id): object|bool
+    public static function fetch_by_id(string $id): object|bool
     {
         $db = Auth::db_login();
         $sql = '
@@ -27,5 +27,29 @@ class UserQuery
         );
 
         return $result;
+    }
+
+    public static function insert(
+        string $id,
+        string $pwd,
+        string $nickname
+    ): object|bool {
+        $db = Auth::db_login();
+        $sql =
+            'insert into users(id, pwd, nickname) values (:id, :pwd, :nickname);';
+
+        // hashing
+        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+        return $db->execute(
+            $sql,
+            [
+                ':id' => $id,
+                ':pwd' => $pwd,
+                ':nickname' => $nickname,
+            ],
+            DataSource::CLS,
+            UserModel::class
+        );
     }
 }
