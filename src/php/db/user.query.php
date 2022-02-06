@@ -9,7 +9,7 @@ use model\UserModel;
 
 class UserQuery {
 
-  public static function fetch_by_id($id): object {
+  public static function fetch_by_id($id): object|bool {
 
     SetDbEnv::set_db_env();
     $db = new DataSource(

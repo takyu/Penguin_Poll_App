@@ -1,2 +1,14 @@
   <h1>LOGIN PAGE</h1>
-  <img src="<?php echo BASE_IMAGE_PATH ?>logo.svg" alt="">
+<form action="<?php echo CURRENT_URI; ?>" method="post">
+  <div>
+    <div>
+      id: <input type="text" name="id">
+    </div>
+    <div>
+      pw: <input type="password" name="pwd" id="">
+    </div>
+    <div>
+      <input type="submit" value="login">
+    </div>
+  </div>
+</form>
