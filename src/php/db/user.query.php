@@ -29,24 +29,21 @@ class UserQuery
         return $result;
     }
 
-    public static function insert(
-        string $id,
-        string $pwd,
-        string $nickname
-    ): object|bool {
+    public static function insert($user): object|bool
+    {
         $db = Auth::db_login();
         $sql =
             'insert into users(id, pwd, nickname) values (:id, :pwd, :nickname);';
 
         // hashing
-        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
 
         return $db->execute(
             $sql,
             [
-                ':id' => $id,
-                ':pwd' => $pwd,
-                ':nickname' => $nickname,
+                ':id' => $user->id,
+                ':pwd' => $user->pwd,
+                ':nickname' => $user->nickname,
             ],
             DataSource::CLS,
             UserModel::class

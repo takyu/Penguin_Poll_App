@@ -7,3 +7,16 @@
   <title>ペンギンについてのアンケート</title>
   <link rel="stylesheet" href="<?php echo BASE_CSS_PATH ?>sample.css">
 </head>
+
+<!-- Check to maintain SESSION -->
+<body>
+  <?php 
+  use lib\Auth;
+
+  if (Auth::is_login()) {
+    echo 'You are logged in.';
+  } else {
+    echo 'You are not logged in.';
+  }
+  ?>
+</body>

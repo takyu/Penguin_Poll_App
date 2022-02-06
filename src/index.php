@@ -17,6 +17,7 @@ require_once SOURCE_BASE . '/libs/auth.php';
 /**
  * model
  */
+require_once SOURCE_BASE . '/model/abstract.model.php';
 require_once SOURCE_BASE . '/model/user.model.php';
 
 /**
