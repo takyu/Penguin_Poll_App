@@ -3,14 +3,9 @@ declare(strict_types=1);
 
 namespace lib;
 
-use Error;
-
 function route(string $rpath, string $method): void
 {
     try {
-
-        // throw new Error();
-        
         if ($rpath === '') {
             $rpath = 'home';
         }

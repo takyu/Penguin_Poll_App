@@ -28,3 +28,18 @@ function get_url($path): string
 {
     return BASE_CONTEXT_PATH . trim($path, '/');
 }
+
+/**
+ * format check function
+ *
+ * @return bool
+ */
+function is_alnum($val): int|false
+{
+    return preg_match("/^[a-zA-Z0-9]+$/", $val);
+}
+
+function is_alnum_and_more_one_capital_alpha($val): int|false
+{
+    return preg_match("/^(?=.*[A-Z])[a-zA-Z0-9]+$/", $val);
+}

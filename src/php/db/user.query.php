@@ -36,7 +36,7 @@ class UserQuery
             'insert into users(id, pwd, nickname) values (:id, :pwd, :nickname);';
 
         // hashing
-        $pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
+        $user->pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
 
         return $db->execute(
             $sql,

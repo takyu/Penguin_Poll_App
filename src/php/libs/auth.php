@@ -29,6 +29,12 @@ class Auth
     public static function login(string $id, string $pwd): bool
     {
         try {
+            if (
+                !(UserModel::validate_id($id) * UserModel::validate_pwd($pwd))
+            ) {
+                return false;
+            }
+
             $is_success = false;
 
             $user = UserQuery::fetch_by_id($id);
@@ -58,6 +64,21 @@ class Auth
     public static function regist(object $user): bool
     {
         try {
+            if (
+                /**
+                 * If all the checks are done and any one of them returns false,
+                 * the result of the operation is zero because it is multiplication,
+                 * and it is true by the negation operator.
+                 */
+                !(
+                    $user->is_valid_id() *
+                    $user->is_valid_pwd() *
+                    $user->is_valid_nickname()
+                )
+            ) {
+                return false;
+            }
+
             $is_success = false;
 
             // Check if the user is already registered
