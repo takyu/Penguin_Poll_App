@@ -12,6 +12,9 @@
 <body>
   <?php 
   use lib\Auth;
+  use lib\Msg;
+
+  Msg::flush();
 
   if (Auth::is_login()) {
     echo 'You are logged in.';

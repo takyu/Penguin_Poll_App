@@ -9,16 +9,17 @@ require_once 'php/config.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 /**
- * libs
- */
-require_once SOURCE_BASE . '/libs/helper.php';
-require_once SOURCE_BASE . '/libs/auth.php';
-
-/**
  * model
  */
 require_once SOURCE_BASE . '/model/abstract.model.php';
 require_once SOURCE_BASE . '/model/user.model.php';
+
+/**
+ * libs
+ */
+require_once SOURCE_BASE . '/libs/helper.php';
+require_once SOURCE_BASE . '/libs/message.php';
+require_once SOURCE_BASE . '/libs/auth.php';
 
 /**
  * db

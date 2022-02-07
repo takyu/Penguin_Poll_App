@@ -11,5 +11,11 @@ define('BASE_JS_PATH', BASE_CONTEXT_PATH . 'js/');
 define('BASE_CSS_PATH', BASE_CONTEXT_PATH . 'css/');
 define('SOURCE_BASE', __DIR__);
 
+define('DEL_FLAG', 1);
+
 define('GO_HOME', 'home');
 define('GO_REFERER', 'referer');
+
+// Switching the DEBUGMODE
+define('DEBUG', true);
+// define('DEBUG', false);

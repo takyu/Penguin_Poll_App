@@ -32,7 +32,7 @@ class Auth
 
         $user = UserQuery::fetch_by_id($id);
 
-        if (!empty($user) && $user->del_flg !== 1) {
+        if (!empty($user) && $user->del_flg !== DEL_FLAG) {
             if (password_verify($pwd, $user->pwd)) {
                 $is_success = true;
                 UserModel::set_session($user);
