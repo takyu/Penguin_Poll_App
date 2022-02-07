@@ -44,10 +44,10 @@ class Auth
                     $is_success = true;
                     UserModel::set_session($user);
                 } else {
-                    echo 'Password does not match.';
+                    Msg::push(Msg::ERROR, 'パスワードが一致しません。');
                 }
             } else {
-                echo 'User does not find.';
+                Msg::push(Msg::ERROR, 'ユーザーが見つかりません。');
             }
         } catch (\Throwable $th) {
             //throw $th;
@@ -84,7 +84,7 @@ class Auth
             // Check if the user is already registered
             $exist_user = UserQuery::fetch_by_id($user->id);
             if (!empty($exist_user)) {
-                echo 'The user already exists';
+                Msg::push(Msg::ERROR, 'ユーザーが既に存在しています。');
                 return false;
             }
 
