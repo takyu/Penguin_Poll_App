@@ -127,4 +127,14 @@ class Auth
             return false;
         }
     }
+
+    public static function logout() {
+        try {
+            UserModel::clear_session();
+        } catch (\Throwable $th) {
+            Msg::push(Msg::DEBUG, $th->getMessage());
+            return false;
+        }
+        return true;
+    }
 }
