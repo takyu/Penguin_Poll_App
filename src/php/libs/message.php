@@ -35,19 +35,24 @@ class Msg extends AbstractModel
 
     public static function flush(): void
     {
-        $msgs_with_type = static::get_sesssion_and_flush() ?? [];
+        try {
+            $msgs_with_type = static::get_sesssion_and_flush() ?? [];
 
-        // Get array of type
-        foreach ($msgs_with_type as $type => $msgs) {
+            // Get array of type
+            foreach ($msgs_with_type as $type => $msgs) {
+                // Skip debug type messages if debug mode is disabled
+                if ($type === static::DEBUG && !DEBUG) {
+                    continue;
+                }
 
-            if ($type === static::DEBUG && !DEBUG) {
-              continue;
+                // Get the message in the array
+                foreach ($msgs as $msg) {
+                    echo "<div>{$type}:{$msg}</div>";
+                }
             }
-            
-            // Get the message in the array
-            foreach ($msgs as $msg) {
-                echo "<div>{$type}:{$msg}</div>";
-            }
+        } catch (\Throwable $th) {
+            Msg::push(Msg::DEBUG, $th->getMessage());
+            Msg::push(Msg::DEBUG, 'error: in Msg::flush.');
         }
     }
 }

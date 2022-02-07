@@ -28,53 +28,82 @@ class Auth
 
     public static function login(string $id, string $pwd): bool
     {
-        $is_success = false;
+        try {
+            $is_success = false;
 
-        $user = UserQuery::fetch_by_id($id);
+            $user = UserQuery::fetch_by_id($id);
 
-        if (!empty($user) && $user->del_flg !== DEL_FLAG) {
-            if (password_verify($pwd, $user->pwd)) {
-                $is_success = true;
-                UserModel::set_session($user);
+            if (!empty($user) && $user->del_flg !== DEL_FLAG) {
+                if (password_verify($pwd, $user->pwd)) {
+                    $is_success = true;
+                    UserModel::set_session($user);
+                } else {
+                    echo 'Password does not match.';
+                }
             } else {
-                echo 'Password does not match.';
+                echo 'User does not find.';
             }
-        } else {
-            echo 'User does not find.';
+        } catch (\Throwable $th) {
+            //throw $th;
+            $is_success = false;
+            Msg::push(Msg::DEBUG, $th->getMessage());
+            Msg::push(
+                Msg::ERROR,
+                "In the login process, an error has occurred.\nPlease give it some time and then try to access it again."
+            );
         }
-
         return $is_success;
     }
 
-    public static function regist($user): bool
+    public static function regist(object $user): bool
     {
-        $is_success = false;
+        try {
+            $is_success = false;
 
-        // Check if the user is already registered
-        $exist_user = UserQuery::fetch_by_id($user->id);
-        if (!empty($exist_user)) {
-            echo 'The user already exists';
+            // Check if the user is already registered
+            $exist_user = UserQuery::fetch_by_id($user->id);
+            if (!empty($exist_user)) {
+                echo 'The user already exists';
+                return false;
+            }
+
+            $is_success = UserQuery::insert($user);
+
+            if ($is_success) {
+                UserModel::set_session($user);
+            }
+        } catch (\Throwable $th) {
+            $is_success = false;
+            Msg::push(Msg::DEBUG, $th->getMessage());
+            Msg::push(
+                Msg::ERROR,
+                "In the regist process, an error has occurred.\nPlease give it some time and then try to access it again."
+            );
+        }
+        return $is_success;
+    }
+
+    public static function is_login(): bool
+    {
+        try {
+            $user = UserModel::get_session();
+        } catch (\Throwable $th) {
+            /**
+             * Clear the login information for errors in get_session.
+             */
+            UserModel::clear_session();
+
+            Msg::push(Msg::DEBUG, $th->getMessage());
+            Msg::push(
+                Msg::ERROR,
+                "An error has occurred.\nPlease login again."
+            );
             return false;
         }
-
-        $is_success = UserQuery::insert($user);
-
-        // Save user authentication in session
-
-        if ($is_success) {
-            UserModel::set_session($user);
+        if (isset($user)) {
+            return true;
+        } else {
+            return false;
         }
-
-        return $is_success;
-    }
-
-    public static function is_login(): bool {
-      $user = UserModel::get_session();
-
-      if (isset($user)) {
-        return true;
-      } else {
-        return false;
-      }
     }
 }

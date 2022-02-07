@@ -67,7 +67,7 @@
   "editor.renderControlCharacters": true,
 
   // tab size
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
 
   /* 
   Display whitespace

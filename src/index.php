@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * Config file (define constant variable)
+ */
 require_once 'php/config.php';
 
 /**
@@ -18,6 +21,7 @@ require_once SOURCE_BASE . '/model/user.model.php';
  * libs
  */
 require_once SOURCE_BASE . '/libs/helper.php';
+require_once SOURCE_BASE . '/libs/router.php';
 require_once SOURCE_BASE . '/libs/message.php';
 require_once SOURCE_BASE . '/libs/auth.php';
 
@@ -28,6 +32,12 @@ require_once SOURCE_BASE . '/db/datasource.php';
 require_once SOURCE_BASE . '/db/user.query.php';
 
 /**
+ * partials
+ */
+// require_once SOURCE_BASE . '/partials/header.php';
+// require_once SOURCE_BASE . '/partials/footer.php';
+
+/**
  *
  * To save the object of $user to the session in login.php.
  * Load the class (user.model.php) that will be the template for the object,
@@ -36,41 +46,17 @@ require_once SOURCE_BASE . '/db/user.query.php';
  */
 session_start();
 
-/**
- * partials
- */
-require_once SOURCE_BASE . '/partials/header.php';
-require_once SOURCE_BASE . '/partials/footer.php';
+use function lib\route;
 
-// confirm object about user
-// use db\UserQuery;
-// $res = UserQuery::fetch_by_id('pensan');
-// var_dump($res);
+try {
+    require_once SOURCE_BASE . '/partials/header.php';
 
-$rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
-$method = strtolower($_SERVER['REQUEST_METHOD']);
+    $rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
+    $method = strtolower($_SERVER['REQUEST_METHOD']);
+    
+    route($rpath, $method);
 
-route($rpath, $method);
-
-function route(string $rpath, string $method): void
-{
-    if ($rpath === '') {
-        $rpath = 'home';
-    }
-
-    $targetFile = SOURCE_BASE . "/controllers/{$rpath}.php";
-
-    if (!file_exists($targetFile)) {
-        require_once SOURCE_BASE . '/views/404.php';
-        return;
-    }
-
-    require_once $targetFile;
-
-    // Use namespace (\<-escape)\{namespace}(\<-escape)\{$rpath}(\<-escape)\{$method}
-    $fn = "\\controller\\{$rpath}\\{$method}";
-
-    // Execute function
-    $fn();
+    require_once SOURCE_BASE . '/partials/footer.php';
+} catch (\Throwable $th) {
+    die('<h1>What?? An error has occured in index.php</h1>');
 }
-?>
