@@ -6,15 +6,16 @@ namespace controller\register;
 use lib\Auth;
 use lib\Msg;
 use model\UserModel;
+use function view\register\index;
 
 function get(): void
 {
-    require_once SOURCE_BASE . '/views/register.php';
+    index();
 }
 
 function post(): void
 {
-    $user = new UserModel;
+    $user = new UserModel();
     $user->id = get_param('id', '');
     $user->pwd = get_param('pwd', '');
     $user->nickname = get_param('nickname', '');

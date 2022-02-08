@@ -9,6 +9,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const webpackConfig = {
   context: path.resolve(__dirname, 'src'),
@@ -32,7 +33,6 @@ const webpackConfig = {
     },
     port: 9999,
     hot: true,
-    watchFiles: ['src/index.php'],
   },
 
   watchOptions: {
@@ -124,7 +124,7 @@ const webpackConfig = {
         {
           from: `${__dirname}/src/.htaccess`,
           to: `${__dirname}/dist/.htaccess`,
-          toType: "file",
+          toType: 'file',
         },
         {
           from: `${__dirname}/src/php/`,
@@ -136,6 +136,11 @@ const webpackConfig = {
         },
       ],
     }),
+
+    /**
+     * Plugin to make real files updated when webpack-dev-server is running
+     */
+    new WriteFilePlugin(),
   ],
 
   optimization: {

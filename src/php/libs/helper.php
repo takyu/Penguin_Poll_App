@@ -24,6 +24,11 @@ function redirect($path): void
     die();
 }
 
+function the_url($path): void
+{
+    echo get_url($path);
+}
+
 function get_url($path): string
 {
     return BASE_CONTEXT_PATH . trim($path, '/');

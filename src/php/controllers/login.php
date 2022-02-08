@@ -6,10 +6,11 @@ namespace controller\login;
 use lib\Auth;
 use lib\Msg;
 use model\UserModel;
+use function view\login\index;
 
 function get(): void
 {
-    require_once SOURCE_BASE . '/views/login.php';
+    index();
 }
 
 function post(): void

@@ -34,8 +34,14 @@ require_once SOURCE_BASE . '/db/user.query.php';
 /**
  * partials
  */
-// require_once SOURCE_BASE . '/partials/header.php';
-// require_once SOURCE_BASE . '/partials/footer.php';
+require_once SOURCE_BASE . '/partials/header.php';
+require_once SOURCE_BASE . '/partials/footer.php';
+
+/**
+ * views
+ */
+require_once SOURCE_BASE . '/views/login.php';
+require_once SOURCE_BASE . '/views/register.php';
 
 /**
  *
@@ -46,17 +52,20 @@ require_once SOURCE_BASE . '/db/user.query.php';
  */
 session_start();
 
+use function partials\header;
+use function partials\footer;
 use function lib\route;
 
+
 try {
-    require_once SOURCE_BASE . '/partials/header.php';
+    header();
 
     $rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
     
     route($rpath, $method);
 
-    require_once SOURCE_BASE . '/partials/footer.php';
+    footer();
 } catch (\Throwable $th) {
     die('<h1>What?? An error has occured in index.php</h1>');
 }
