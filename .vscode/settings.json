@@ -23,7 +23,7 @@
   // Color of line number and line highlight
   "workbench.colorCustomizations": {
     "editor.lineHighlightBackground": "#222222",
-    "editorLineNumber.foreground": "#3f3f3f",
+    // "editorLineNumber.foreground": "#3f3f3f",
     "editorLineNumber.activeForeground": "#51ff00"
   },
 
@@ -67,7 +67,7 @@
   "editor.renderControlCharacters": true,
 
   // tab size
-  "editor.tabSize": 4,
+  "editor.tabSize": 2,
 
   /* 
   Display whitespace

@@ -24,7 +24,7 @@ interface IDataSource
 class DataSource implements IDataSource
 {
     private PDO $conn;
-    private bool $sql_request;
+    private bool $sql_result;
     public const CLS = 'cls';
 
     public function __construct(
@@ -43,10 +43,10 @@ class DataSource implements IDataSource
         $this->conn = new PDO($dsn, $username, $password, $options);
     }
 
-    public function execute_sql(string $sql, array $params): PDOStatement|bool
+    private function execute_sql(string $sql, array $params): PDOStatement|bool
     {
         $stmt = $this->conn->prepare($sql);
-        $this->sql_request = $stmt->execute($params);
+        $this->sql_result = $stmt->execute($params);
         return $stmt;
     }
 
@@ -54,7 +54,7 @@ class DataSource implements IDataSource
     public function execute(string $sql = '', array $params = []): bool
     {
         $this->execute_sql($sql, $params);
-        return $this->sql_request;
+        return $this->sql_result;
     }
 
     /* Fetch */

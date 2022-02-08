@@ -2,3 +2,4 @@ info_user.txt
 vendor/
 node_modules/
 db_auth.env
+dist/
