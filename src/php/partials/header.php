@@ -49,9 +49,9 @@ Msg::flush();
 
 if (DEBUG) {
     if (Auth::is_login()) {
-        echo 'You are logged in.';
+        echo "<div class='alert alert-secondary'>You are logged in.</div>";
     } else {
-        echo 'You are not logged in.';
+        echo "<div class='alert alert-secondary'>You are not logged in.</div>";
     }
 }
 

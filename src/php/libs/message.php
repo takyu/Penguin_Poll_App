@@ -38,6 +38,8 @@ class Msg extends AbstractModel
         try {
             $msgs_with_type = static::get_sesssion_and_flush() ?? [];
 
+            echo "<div id='messages'>";
+
             // Get array of type
             foreach ($msgs_with_type as $type => $msgs) {
                 // Skip debug type messages if debug mode is disabled
@@ -45,11 +47,15 @@ class Msg extends AbstractModel
                     continue;
                 }
 
+                $color = set_class_alert($type);
+
                 // Get the message in the array
                 foreach ($msgs as $msg) {
-                    echo "<div>{$type}:{$msg}</div>";
+                    echo "<div class='alert $color'>{$msg}</div>";
                 }
             }
+
+            echo '</div>';
         } catch (\Throwable $th) {
             Msg::push(Msg::DEBUG, $th->getMessage());
             Msg::push(Msg::DEBUG, 'error: in Msg::flush.');

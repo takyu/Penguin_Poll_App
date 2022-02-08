@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use lib\Msg;
+
 function get_param(
     string $key,
     string $default_val,
@@ -32,6 +34,20 @@ function the_url($path): void
 function get_url($path): string
 {
     return BASE_CONTEXT_PATH . trim($path, '/');
+}
+
+function set_class_alert($type) {
+  switch ($type) {
+      case Msg::INFO:
+          return 'alert-primary';
+          break;
+      case Msg::ERROR:
+          return 'alert-danger';
+          break;
+      case Msg::DEBUG:
+          return 'alert-warning';
+          break;
+  }
 }
 
 /**

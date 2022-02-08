@@ -64,7 +64,7 @@ class UserModel extends AbstractModel
     {
         $res = true;
 
-        if (empty($res)) {
+        if (empty($val)) {
             Msg::push(Msg::ERROR, 'パスワードを入力してください。');
             $res = false;
         } else {
