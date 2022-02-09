@@ -7,7 +7,7 @@ abstract class AbstractModel
 {
     protected static string|null $SESSION_NAME = null;
 
-    public static function set_session($val): void
+    public static function setSession($val): void
     {
         if (empty(static::$SESSION_NAME)) {
             throw new Error('Error: Specify $SESSION_NAME.');
@@ -15,24 +15,24 @@ abstract class AbstractModel
         $_SESSION[static::$SESSION_NAME] = $val;
     }
 
-    public static function get_session(): object|array|null
+    public static function getSession(): object|array|null
     {
         return $_SESSION[static::$SESSION_NAME] ?? null;
     }
 
-    public static function clear_session(): void
+    public static function clearSession(): void
     {
-        static::set_session(null);
+        static::setSession(null);
     }
 
-    public static function get_sesssion_and_flush(): object|array|null
+    public static function getSesssionAndFlush(): object|array|null
     {
         try {
-            return static::get_session();
+            return static::getSession();
         } catch (\Throwable $th) {
             throw $th;
         } finally {
-            static::clear_session();
+            static::clearSession();
         }
     }
 }

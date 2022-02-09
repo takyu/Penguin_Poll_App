@@ -10,7 +10,7 @@ use model\UserModel;
 
 class Auth
 {
-    public static function db_login(): object
+    public static function dbLogin(): object
     {
         $dotenv = Dotenv::createImmutable(
             __DIR__ . '/../../../',
@@ -29,20 +29,18 @@ class Auth
     public static function login(string $id, string $pwd): bool
     {
         try {
-            if (
-                !(UserModel::validate_id($id) * UserModel::validate_pwd($pwd))
-            ) {
+            if (!(UserModel::validateId($id) * UserModel::validatePwd($pwd))) {
                 return false;
             }
 
             $is_success = false;
 
-            $user = UserQuery::fetch_by_id($id);
+            $user = UserQuery::fetchById($id);
 
             if (!empty($user) && $user->del_flg !== DEL_FLAG) {
                 if (password_verify($pwd, $user->pwd)) {
                     $is_success = true;
-                    UserModel::set_session($user);
+                    UserModel::setSession($user);
                 } else {
                     Msg::push(Msg::ERROR, 'パスワードが一致しません。');
                 }
@@ -71,9 +69,9 @@ class Auth
                  * and it is true by the negation operator.
                  */
                 !(
-                    $user->is_valid_id() *
-                    $user->is_valid_pwd() *
-                    $user->is_valid_nickname()
+                    $user->isValidId() *
+                    $user->isValidPwd() *
+                    $user->isValidNickname()
                 )
             ) {
                 return false;
@@ -82,7 +80,7 @@ class Auth
             $is_success = false;
 
             // Check if the user is already registered
-            $exist_user = UserQuery::fetch_by_id($user->id);
+            $exist_user = UserQuery::fetchById($user->id);
             if (!empty($exist_user)) {
                 Msg::push(Msg::ERROR, 'ユーザーが既に存在しています。');
                 return false;
@@ -91,7 +89,7 @@ class Auth
             $is_success = UserQuery::insert($user);
 
             if ($is_success) {
-                UserModel::set_session($user);
+                UserModel::setSession($user);
             }
         } catch (\Throwable $th) {
             $is_success = false;
@@ -104,15 +102,15 @@ class Auth
         return $is_success;
     }
 
-    public static function is_login(): bool
+    public static function isLogin(): bool
     {
         try {
-            $user = UserModel::get_session();
+            $user = UserModel::getSession();
         } catch (\Throwable $th) {
             /**
              * Clear the login information for errors in get_session.
              */
-            UserModel::clear_session();
+            UserModel::clearSession();
 
             Msg::push(Msg::DEBUG, $th->getMessage());
             Msg::push(
@@ -128,13 +126,22 @@ class Auth
         }
     }
 
-    public static function logout() {
+    public static function logOut(): bool
+    {
         try {
-            UserModel::clear_session();
+            UserModel::clearSession();
         } catch (\Throwable $th) {
             Msg::push(Msg::DEBUG, $th->getMessage());
             return false;
         }
         return true;
+    }
+
+    public static function requireLogin(): void
+    {
+        if (!static::isLogin()) {
+            Msg::push(Msg::ERROR, 'ログインしてください。');
+            redirect('login');
+        }
     }
 }

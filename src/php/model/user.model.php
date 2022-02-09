@@ -21,12 +21,12 @@ class UserModel extends AbstractModel
     /**
      * Check format of id
      */
-    public function is_valid_id(): bool
+    public function isValidId(): bool
     {
-        return static::validate_id($this->id);
+        return static::validateId($this->id);
     }
 
-    public static function validate_id(string $val): bool
+    public static function validateId(string $val): bool
     {
         $res = true;
 
@@ -55,12 +55,12 @@ class UserModel extends AbstractModel
     /**
      * Check format of password
      */
-    public function is_valid_pwd(): bool
+    public function isValidPwd(): bool
     {
-        return static::validate_pwd($this->pwd);
+        return static::validatePwd($this->pwd);
     }
 
-    public static function validate_pwd(string $val): bool
+    public static function validatePwd(string $val): bool
     {
         $res = true;
 
@@ -89,12 +89,12 @@ class UserModel extends AbstractModel
     /**
      * Check format of nickname
      */
-    public function is_valid_nickname(): bool
+    public function isValidNickname(): bool
     {
-        return static::validate_nickname($this->nickname);
+        return static::validateNickname($this->nickname);
     }
 
-    public static function validate_nickname(string $val): bool
+    public static function validateNickname(string $val): bool
     {
         $res = true;
 

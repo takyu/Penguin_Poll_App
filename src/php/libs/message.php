@@ -14,7 +14,7 @@ class Msg extends AbstractModel
 
     private static function init(): void
     {
-        static::set_session([
+        static::setSession([
             static::ERROR => [],
             static::INFO => [],
             static::DEBUG => [],
@@ -24,19 +24,19 @@ class Msg extends AbstractModel
     public static function push(string $type, string $msg): void
     {
         // Initialize
-        if (!is_array(static::get_session())) {
+        if (!is_array(static::getSession())) {
             static::init();
         }
 
-        $msgs = static::get_session();
+        $msgs = static::getSession();
         $msgs[$type][] = $msg;
-        static::set_session($msgs);
+        static::setSession($msgs);
     }
 
     public static function flush(): void
     {
         try {
-            $msgs_with_type = static::get_sesssion_and_flush() ?? [];
+            $msgs_with_type = static::getSesssionAndFlush() ?? [];
 
             echo "<div id='messages'>";
 

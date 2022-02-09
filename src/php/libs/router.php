@@ -19,6 +19,9 @@ function route(string $rpath, string $method): void
 
         require_once $targetFile;
 
+        // Replace slashes across directories with backslashes in namespace.
+        $rpath = str_replace('/', '\\', $rpath);
+
         // Use namespace (\<-escape)\{namespace}(\<-escape)\{$rpath}(\<-escape)\{$method}
         $fn = "\\controller\\{$rpath}\\{$method}";
 

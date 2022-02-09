@@ -16,6 +16,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
  */
 require_once SOURCE_BASE . '/model/abstract.model.php';
 require_once SOURCE_BASE . '/model/user.model.php';
+require_once SOURCE_BASE . '/model/topic.model.php';
 
 /**
  * libs
@@ -30,18 +31,21 @@ require_once SOURCE_BASE . '/libs/auth.php';
  */
 require_once SOURCE_BASE . '/db/datasource.php';
 require_once SOURCE_BASE . '/db/user.query.php';
+require_once SOURCE_BASE . '/db/topic.query.php';
 
 /**
  * partials
  */
 require_once SOURCE_BASE . '/partials/header.php';
 require_once SOURCE_BASE . '/partials/footer.php';
+require_once SOURCE_BASE . '/partials/topic-list-item.php';
 
 /**
  * views
  */
 require_once SOURCE_BASE . '/views/login.php';
 require_once SOURCE_BASE . '/views/register.php';
+require_once SOURCE_BASE . '/views/topic/archive.php';
 
 /**
  *
@@ -68,4 +72,5 @@ try {
     footer();
 } catch (\Throwable $th) {
     die('<h1>What?? An error has occured in index.php</h1>');
+    // var_dump($th);
 }

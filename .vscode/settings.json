@@ -84,7 +84,7 @@
   "editor.comments.insertSpace": true,
 
   // Do not close selected files even if they are not edited
-  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreview": true,
 
   // Icon theme
   "workbench.iconTheme": "material-icon-theme",

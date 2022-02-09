@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 namespace db;
 
 use PDO;
@@ -13,7 +11,7 @@ interface IDataSource
 
     // Fetch
     public function select(string $sql, array $params): array;
-    public function select_one(string $sql, array $params): object|array|bool;
+    public function selectOne(string $sql, array $params): object|array|bool;
 
     // Transaction
     public function begin(): void;
@@ -24,7 +22,7 @@ interface IDataSource
 class DataSource implements IDataSource
 {
     private PDO $conn;
-    private bool $sql_result;
+    private bool $sql_request;
     public const CLS = 'cls';
 
     public function __construct(
@@ -43,18 +41,18 @@ class DataSource implements IDataSource
         $this->conn = new PDO($dsn, $username, $password, $options);
     }
 
-    private function execute_sql(string $sql, array $params): PDOStatement|bool
+    public function executeSql(string $sql, array $params): PDOStatement|bool
     {
         $stmt = $this->conn->prepare($sql);
-        $this->sql_result = $stmt->execute($params);
+        $this->sql_request = $stmt->execute($params);
         return $stmt;
     }
 
     /* Execute */
     public function execute(string $sql = '', array $params = []): bool
     {
-        $this->execute_sql($sql, $params);
-        return $this->sql_result;
+        $this->executeSql($sql, $params);
+        return $this->sql_request;
     }
 
     /* Fetch */
@@ -64,19 +62,20 @@ class DataSource implements IDataSource
         $type = '',
         $cls = ''
     ): array {
-        $stmt = $this->execute_sql($sql, $params);
+        $stmt = $this->executeSql($sql, $params);
         if ($type === static::CLS) {
             return $stmt->fetchAll(PDO::FETCH_CLASS, $cls);
         }
         return $stmt->fetchAll();
     }
-    public function select_one(
+    public function selectOne(
         string $sql = '',
         array $params = [],
         $type = '',
         $cls = ''
     ): object|array|bool {
         $result = $this->select($sql, $params, $type, $cls);
+        //var_dump($result[0]);
         return count($result) > 0 ? $result[0] : false;
     }
 

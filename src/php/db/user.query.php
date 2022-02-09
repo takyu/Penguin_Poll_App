@@ -9,15 +9,15 @@ use model\UserModel;
 
 class UserQuery
 {
-    public static function fetch_by_id(string $id): object|bool
+    public static function fetchById(string $id): object|bool
     {
-        $db = Auth::db_login();
+        $db = Auth::dbLogin();
         $sql = '
       select * from users
       where id = :id;
     ';
 
-        $result = $db->select_one(
+        $result = $db->selectOne(
             $sql,
             [
                 ':id' => $id,
@@ -31,7 +31,7 @@ class UserQuery
 
     public static function insert($user): object|bool
     {
-        $db = Auth::db_login();
+        $db = Auth::dbLogin();
         $sql =
             'insert into users(id, pwd, nickname) values (:id, :pwd, :nickname);';
 

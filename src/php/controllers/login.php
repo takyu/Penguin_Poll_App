@@ -19,7 +19,7 @@ function post(): void
     $pwd = get_param('pwd', '');
 
     if (Auth::login($id, $pwd)) {
-        $user = UserModel::get_session();
+        $user = UserModel::getSession();
         Msg::push(
             Msg::INFO,
             "認証に成功しました。{$user->nickname}さん、ようこそ!!"

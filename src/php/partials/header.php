@@ -32,7 +32,7 @@ function header()
           <span class="fs-2 fw-bold mb-0">ペンギンについてのアンケート</span>
         </a>
         <div class="col-md-auto">
-          <?php if (Auth::is_login()): ?>
+          <?php if (Auth::isLogin()): ?>
             <?php // Display when user is logined ?>
             <a href="<?php the_url(
                 'topic/create'
@@ -53,7 +53,7 @@ function header()
 Msg::flush();
 
 if (DEBUG) {
-    if (Auth::is_login()) {
+    if (Auth::isLogin()) {
         echo "<div class='alert alert-secondary'>You are logged in.</div>";
     } else {
         echo "<div class='alert alert-secondary'>You are not logged in.</div>";
