@@ -7,7 +7,7 @@ use lib\Msg;
 
 function header()
 {
-?>
+    ?>
 
 <!DOCTYPE html>
 <html>
@@ -32,13 +32,18 @@ function header()
           <span class="fs-2 fw-bold mb-0">ペンギンについてのアンケート</span>
         </a>
         <div class="col-md-auto">
-          <?php if (true): ?>
+          <?php if (Auth::is_login()): ?>
+            <?php // Display when user is logined ?>
+            <a href="<?php the_url(
+                'topic/create'
+            ); ?>" class="btn btn-primary mr-2">投稿</a>
+            <a href="<?php the_url('topic/archive'); ?>" class="mr-2">過去の投稿</a>
+            <a href="<?php the_url('logout'); ?>">ログアウト</a>
+          <?php else: ?>
           <a href="<?php the_url(
               'register'
           ); ?>" class="btn btn-primary mr-2">登録</a>
           <a href="<?php the_url('login'); ?>">ログイン</a>
-          <?php else: ?>
-            <!-- Display when user is logined. -->
           <?php endif; ?>
         </div>
       </nav>
@@ -54,7 +59,6 @@ if (DEBUG) {
         echo "<div class='alert alert-secondary'>You are not logged in.</div>";
     }
 }
-
 } // header()
 
 ?>
