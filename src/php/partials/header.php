@@ -11,6 +11,7 @@ function header()
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +22,7 @@ function header()
   <link href="//fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo BASE_CSS_PATH; ?>style.css">
 </head>
+
 <body>
   <div id="container">
     <header class="container my-2">
@@ -33,23 +35,23 @@ function header()
         </a>
         <div class="col-md-auto">
           <?php if (Auth::isLogin()): ?>
-            <?php // Display when user is logined ?>
-            <a href="<?php the_url(
+          <?php // Display when user is logined ?>
+          <a href="<?php the_url(
                 'topic/create'
             ); ?>" class="btn btn-primary mr-2">投稿</a>
-            <a href="<?php the_url('topic/archive'); ?>" class="mr-2">過去の投稿</a>
-            <a href="<?php the_url('logout'); ?>">ログアウト</a>
+          <a href="<?php the_url('topic/archive'); ?>" class="mr-2">過去の投稿</a>
+          <a href="<?php the_url('logout'); ?>">ログアウト</a>
           <?php else: ?>
           <a href="<?php the_url(
               'register'
-          ); ?>" class="btn btn-primary mr-2">登録</a>
+          ); ?>" class="btn btn-primary me-2">登録</a>
           <a href="<?php the_url('login'); ?>">ログイン</a>
           <?php endif; ?>
         </div>
       </nav>
     </header>
     <main class="container py-3">
-<?php
+      <?php
 Msg::flush();
 
 if (DEBUG) {

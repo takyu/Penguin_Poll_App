@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace controller\home;
 
+use db\TopicQuery;
+
+use function view\home\index;
+
 function get(): void
 {
-    require_once SOURCE_BASE . '/views/home.php';
+    $topics = TopicQuery::fetchByPublishedTopics();
+    index($topics);
 }
-?>
