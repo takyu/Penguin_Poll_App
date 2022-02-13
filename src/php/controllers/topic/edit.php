@@ -13,6 +13,18 @@ function get()
 {
     Auth::requireLogin();
 
+    /**
+     * Clear the session at the end (flush)
+     * to avoid showing the remaining session information
+     * in another edit display when you move to another it.
+     */
+    $topic = TopicModel::getSesssionAndFlush();
+
+    if (!empty($topic)) {
+        index($topic, true);
+        return;
+    }
+
     $topic = new TopicModel();
     $topic->id = (int) get_param('topic_id', null, false);
 
@@ -48,6 +60,7 @@ function post()
         redirect('topic/archive');
     } else {
         Msg::push(Msg::ERROR, 'トピックの更新に失敗しました。');
+        TopicModel::setSession($topic);
         redirect(GO_REFERER);
     }
 }

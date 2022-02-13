@@ -13,10 +13,14 @@ function get()
 {
     Auth::requireLogin();
 
-    $topic = new TopicModel();
-    $topic->id = -1;
-    $topic->title = '';
-    $topic->published = 1;
+    $topic = TopicModel::getSesssionAndFlush();
+
+    if (empty($topic)) {
+        $topic = new TopicModel();
+        $topic->id = -1;
+        $topic->title = '';
+        $topic->published = 1;
+    }
 
     index($topic, false);
 }
@@ -44,6 +48,7 @@ function post()
         redirect('topic/archive');
     } else {
         Msg::push(Msg::ERROR, 'トピックの登録に失敗しました。');
+        TopicModel::setSession($topic);
         redirect(GO_REFERER);
     }
 }
