@@ -17,6 +17,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once SOURCE_BASE . '/model/abstract.model.php';
 require_once SOURCE_BASE . '/model/user.model.php';
 require_once SOURCE_BASE . '/model/topic.model.php';
+require_once SOURCE_BASE . '/model/comment.model.php';
 
 /**
  * libs
@@ -32,6 +33,7 @@ require_once SOURCE_BASE . '/libs/auth.php';
 require_once SOURCE_BASE . '/db/datasource.php';
 require_once SOURCE_BASE . '/db/user.query.php';
 require_once SOURCE_BASE . '/db/topic.query.php';
+require_once SOURCE_BASE . '/db/comment.query.php';
 
 /**
  * partials
@@ -48,6 +50,7 @@ require_once SOURCE_BASE . '/views/home.php';
 require_once SOURCE_BASE . '/views/login.php';
 require_once SOURCE_BASE . '/views/register.php';
 require_once SOURCE_BASE . '/views/topic/archive.php';
+require_once SOURCE_BASE . '/views/topic/detail.php';
 
 /**
  *
@@ -66,13 +69,15 @@ use function lib\route;
 try {
     header();
 
-    $rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
+    $url = parse_url(CURRENT_URI);
+
+    $rpath = str_replace(BASE_CONTEXT_PATH, '', $url['path']);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
     
     route($rpath, $method);
 
     footer();
 } catch (\Throwable $th) {
+  var_dump($th);
     die('<h1>What?? An error has occured in index.php</h1>');
-    // var_dump($th);
 }

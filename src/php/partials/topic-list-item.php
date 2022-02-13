@@ -19,15 +19,15 @@ function topic_list_item($topic, $title_url, $with_status)
   <div class="col-auto mx-auto">
     <div class="text-center row">
       <div class="view col-auto min-w-100">
-        <div class="h1 mb-0"><?php echo $topic->views; ?></div>
+        <div class="fs-1 mb-0"><?php echo $topic->views; ?></div>
         <div class="mb-0">Views</div>
       </div>
       <div class="likes-green col-auto min-w-100">
-        <div class="h1 mb-0"><?php echo $topic->likes; ?></div>
+        <div class="fs-1 mb-0"><?php echo $topic->likes; ?></div>
         <div class="mb-0">賛成</div>
       </div>
       <div class="dislikes-red col-auto min-w-100">
-        <div class="h1 mb-0"><?php echo $topic->dislikes; ?></div>
+        <div class="fs-1 mb-0"><?php echo $topic->dislikes; ?></div>
         <div class="mb-0">反対</div>
       </div>
     </div>

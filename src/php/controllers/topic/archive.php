@@ -1,13 +1,16 @@
 <?php
+declare(strict_types=1);
+
 namespace controller\topic\archive;
 
 use db\TopicQuery;
 use lib\Auth;
+use lib\Msg;
 use model\UserModel;
 
 use function view\topic\archive\index;
 
-function get()
+function get(): void
 {
     Auth::requireLogin();
 

@@ -26,10 +26,11 @@ class TopicModel extends AbstractModel
     /**
      * Check format of id
      */
-    // public function is_valid_id(): bool
-    // {
-    //     return static::validate_id($this->id);
-    // }
+    public function isValidId(): bool
+    {
+        // return static::validate_id($this->id);
+        return true;
+    }
 
     // public static function validate_id(string $val): bool
     // {

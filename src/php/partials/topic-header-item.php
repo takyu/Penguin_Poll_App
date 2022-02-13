@@ -5,9 +5,10 @@ use lib\Auth;
 
 function topic_header_item($topic, $from_top_page)
 {
-?>
+    ?>
 
 <div class="row">
+
   <!-- left side chart -->
   <div class="col">
     <?php chart($topic); ?>
@@ -16,7 +17,7 @@ function topic_header_item($topic, $from_top_page)
   <!-- right side content -->
   <div class="col my-5">
     <?php topic_main($topic, $from_top_page); ?>
-    <?php comment_form($topic) ?>
+    <?php comment_form($topic); ?>
   </div>
 
 </div>
@@ -24,8 +25,9 @@ function topic_header_item($topic, $from_top_page)
 <?php
 }
 
-function chart($topic) {
-?>
+function chart($topic)
+{
+    ?>
 
 <canvas id="chart" width="400" height="450" data-likes="<?php echo $topic->likes; ?>"
   data-dislikes="<?php echo $topic->dislikes; ?>"></canvas>
@@ -38,22 +40,25 @@ function chart($topic) {
 <?php
 }
 
-function topic_main($topic, $from_top_page) {
-?>
+function topic_main($topic, $from_top_page)
+{
+    ?>
 
 <div>
-  <?php if($from_top_page) : ?>
+  <?php if ($from_top_page): ?>
   <h1 class="visually-hidden">ペンギンについてのアンケート</h1>
-  <h2 class="h1">
-    <a class="text-body" href="<?php the_url('topic/detail?topic_id=' . $topic->id); ?>">
+  <h2 class="fs-1">
+    <a class="text-body" href="<?php the_url(
+        'topic/detail?topic_id=' . $topic->id
+    ); ?>">
       <?php echo $topic->title; ?>
     </a>
   </h2>
-  <?php else : ?>
+  <?php else: ?>
   <h1><?php echo $topic->title; ?></h1>
   <?php endif; ?>
-  <span class="me-1 h5">Posted by <?php echo $topic->nickname; ?></span>
-  <span class="me-1 h5">&bull;</span>
+  <span class="me-1 fs-5">Posted by <?php echo $topic->nickname; ?></span>
+  <span class="me-1 fs-5">&bull;</span>
   <span class="h5"><?php echo $topic->views; ?></span>
 </div>
 <div class="container text-center my-4">
@@ -72,12 +77,13 @@ function topic_main($topic, $from_top_page) {
 <?php
 }
 
-function comment_form($topic) {
-?>
+function comment_form($topic)
+{
+    ?>
 
-<?php if(Auth::isLogin()) : ?>
+<?php if (Auth::isLogin()): ?>
 <form action="<?php the_url('topic/detail'); ?>" method="POST">
-  <span class="h4">あなたは賛成？それとも反対？</span>
+  <span class="fs-4">あなたは賛成？それとも反対？</span>
   <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
   <div class="mb-2">
     <textarea class="form-control bg-white" id="floatingTextarea" style="height: 90px"></textarea>
@@ -99,10 +105,12 @@ function comment_form($topic) {
   </div>
 </form>
 </div>
-<?php else : ?>
+<?php else: ?>
 <div class="text-center mt-5">
   <div class="mb-2">ログインしてアンケートに参加してね！</div>
-  <a href="<?php the_url('login'); ?>" class="btn btn-lg btn-success">ログインはこちら</a>
+  <a href="<?php the_url(
+      'login'
+  ); ?>" class="btn btn-lg btn-success">ログインはこちら</a>
 </div>
 <?php endif; ?>
 
