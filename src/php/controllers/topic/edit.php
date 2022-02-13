@@ -14,14 +14,14 @@ function get()
     Auth::requireLogin();
 
     $topic = new TopicModel();
-    $topic->id = (int) get_param('topic_id', '', false);
+    $topic->id = (int) get_param('topic_id', null, false);
 
     $user = UserModel::getSession();
     Auth::requirePermission($topic->id, $user);
 
     $fetchedTopic = TopicQuery::fetchById($topic);
 
-    index($fetchedTopic);
+    index($fetchedTopic, true);
 }
 
 function post()

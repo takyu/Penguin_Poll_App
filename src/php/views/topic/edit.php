@@ -1,10 +1,11 @@
 <?php
 namespace view\topic\edit;
 
-function index($topic)
+function index($topic, $is_edit)
 {
+  $header_title = $is_edit ? 'トピックの編集' : 'トピックの作成';
     ?>
-<h1 class="fs-2 mb-3">トピック編集</h1>
+<h1 class="mb-3"><?php echo $header_title; ?></h1>
 <div class="bg-white p-4 shadow-sm mx-auto rounded">
   <form action="<?php echo CURRENT_URI;?>" method="POST">
     <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">

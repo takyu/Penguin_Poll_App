@@ -5,7 +5,7 @@ use lib\Msg;
 
 function get_param(
     string $key,
-    string $default_val,
+    ?string $default_val,
     bool $is_post = true
 ): string {
     $arry = $is_post ? $_POST : $_GET;

@@ -28,9 +28,7 @@ function route(string $rpath, string $method): void
         $fn();
     } catch (\Throwable $th) {
         Msg::push(Msg::DEBUG, $th->getMessage());
-        var_dump($th->getMessage());
         Msg::push(Msg::ERROR, 'Oops, Something is wrong!');
-        // redirect('404');
-        require_once SOURCE_BASE . '/views/404.php';
+        redirect('404');
     }
 }
