@@ -28,107 +28,52 @@ class TopicModel extends AbstractModel
      */
     public function isValidId(): bool
     {
-        // return static::validate_id($this->id);
-        return true;
+        return static::validateId($this->id);
     }
-
     public static function validateId($val): bool
     {
+        if (empty($val) || !is_numeric($val)) {
+            Msg::push(Msg::ERROR, 'パラメーターが不正です。');
+            return false;
+        }
         return true;
     }
 
-    // public static function validate_id(string $val): bool
-    // {
-    //     $res = true;
+    /**
+     * Check format of title
+     */
+    public function isValidTitle(): bool
+    {
+        return static::validateTitle($this->title);
+    }
+    public static function validateTitle($val): bool
+    {
+        if (empty($val)) {
+            Msg::push(Msg::ERROR, 'タイトルを入力してください。');
+            return false;
+        } elseif (mb_strlen($val) > 30) {
+            Msg::push(Msg::ERROR, 'タイトルは30文字以内で入力してください。');
+            return false;
+        }
+        return true;
+    }
 
-    //     if (empty($val)) {
-    //         Msg::push(Msg::ERROR, 'ユーザーIDを入力してください。');
-    //         $res = false;
-    //     } else {
-    //         if (strlen($val) > 15) {
-    //             Msg::push(
-    //                 Msg::ERROR,
-    //                 ' ユーザーIDは15桁以下で入力してください。'
-    //             );
-    //             $res = false;
-    //         }
-    //         if (!is_alnum($val)) {
-    //             Msg::push(
-    //                 Msg::ERROR,
-    //                 'ユーザーIDは半角英数字で入力してください。'
-    //             );
-    //             $res = false;
-    //         }
-    //     }
-    //     return $res;
-    // }
-
-    // /**
-    //  * Check format of password
-    //  */
-    // public function is_valid_pwd(): bool
-    // {
-    //     return static::validate_pwd($this->pwd);
-    // }
-
-    // public static function validate_pwd(string $val): bool
-    // {
-    //     $res = true;
-
-    //     if (empty($val)) {
-    //         Msg::push(Msg::ERROR, 'パスワードを入力してください。');
-    //         $res = false;
-    //     } else {
-    //         if (strlen($val) < 6) {
-    //             Msg::push(
-    //                 Msg::ERROR,
-    //                 'パスワードは6桁以上で入力してください。'
-    //             );
-    //             $res = false;
-    //         }
-    //         if (!is_alnum_and_more_one_capital_alpha($val)) {
-    //             Msg::push(
-    //                 Msg::ERROR,
-    //                 'パスワードは半角英数字かつ、一つ以上の大文字のアルファベットを入力してください。'
-    //             );
-    //             $res = false;
-    //         }
-    //     }
-    //     return $res;
-    // }
-
-    // /**
-    //  * Check format of nickname
-    //  */
-    // public function is_valid_nickname(): bool
-    // {
-    //     return static::validate_nickname($this->nickname);
-    // }
-
-    // public static function validate_nickname(string $val): bool
-    // {
-    //     $res = true;
-
-    //     if (empty($val)) {
-    //         Msg::push(Msg::ERROR, 'ニックネームを入力してください。');
-    //         $res = false;
-    //     } else {
-    //         /**
-    //          * strlen
-    //          * Half-width characters count as one character,
-    //          * full-width characters count as two characters.
-    //          *
-    //          * mb_strlen
-    //          * Half-width characters and full-width them count as one character.
-    //          */
-    //         if (mb_strlen($val) > 10) {
-    //             Msg::push(
-    //                 Msg::ERROR,
-    //                 'ニックネームは10文字以下で入力してください。'
-    //             );
-    //             $res = false;
-    //         }
-    //     }
-    //     return $res;
-    // }
+    /**
+     * Check format of published value
+     */
+    public function isValidPublished(): bool
+    {
+        return static::validatePublished($this->published);
+    }
+    public static function validatePublished($val): bool
+    {
+        if (!isset($val)) {
+            Msg::push(Msg::ERROR, '公開もしくは非公開を選択してください。');
+            return false;
+        } elseif (!($val == 0 || $val == 1)) {
+            Msg::push(Msg::ERROR, '公開ステータスが不正です。');
+            return false;
+        }
+        return true;
+    }
 }

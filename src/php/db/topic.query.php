@@ -114,6 +114,16 @@ class TopicQuery
 
     public static function update($topic): bool
     {
+        if (
+            !(
+                $topic->isValidId() *
+                $topic->isValidTitle() *
+                $topic->isValidPublished()
+            )
+        ) {
+            return false;
+        }
+
         $db = Auth::dbLogin();
         $sql = 'update topics
         set published = :published,
@@ -129,6 +139,16 @@ class TopicQuery
 
     public static function insert($topic, $user)
     {
+        if (
+            !(
+                $user->isValidId() *
+                $topic->isValidTitle() *
+                $topic->isValidPublished()
+            )
+        ) {
+            return false;
+        }
+
         $db = Auth::dbLogin();
         $sql = 'insert into topics(title, published, user_id)
             values (:title, :published, :user_id);
