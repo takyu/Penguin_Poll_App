@@ -23,5 +23,5 @@ function get(): void
         redirect('404');
     }
 
-    index($topic, $comments);
+    index($fetchd_topic, $comments);
 }
