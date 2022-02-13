@@ -15,6 +15,8 @@ function get(): void
     $topic = new TopicModel();
     $topic->id = (int) get_param('topic_id', '', false);
 
+    TopicQuery::incrementViewCount($topic);
+
     $fetchd_topic = TopicQuery::fetchById($topic);
     $comments = CommentQuery::fetchByTopicId($topic);
 

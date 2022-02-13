@@ -59,7 +59,7 @@ function topic_main($topic, $from_top_page)
   <?php endif; ?>
   <span class="me-1 fs-5">Posted by <?php echo $topic->nickname; ?></span>
   <span class="me-1 fs-5">&bull;</span>
-  <span class="h5"><?php echo $topic->views; ?></span>
+  <span class="h5"><?php echo $topic->views; ?> views</span>
 </div>
 <div class="container text-center my-4">
   <div class="row justify-content-around">

@@ -74,4 +74,20 @@ class TopicQuery
 
         return $result;
     }
+
+    public static function incrementViewCount($topic): bool
+    {
+        if (!$topic->isValidId()) {
+            return false;
+        }
+
+        $db = Auth::dbLogin();
+
+        $sql = 'update topics
+        set views = views + 1
+        where id = ?;
+        ';
+
+        return $db->execute($sql, [$topic->id]);
+    }
 }
