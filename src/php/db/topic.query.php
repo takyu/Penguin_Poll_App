@@ -61,7 +61,6 @@ class TopicQuery
             where t.id = ?
             and t.del_flg != 1
             and u.del_flg != 1
-            and t.published = 1
             order by t.id desc;
         ';
 
@@ -89,5 +88,42 @@ class TopicQuery
         ';
 
         return $db->execute($sql, [$topic->id]);
+    }
+
+    public static function isUserOwnTopic($topic_id, $user): bool
+    {
+        if (!(TopicModel::validateId($topic_id) && $user->isValidId())) {
+            return false;
+        }
+
+        $db = Auth::dbLogin();
+        $sql = 'select count(1) as count
+          from topics t
+          where t.id = :topic_id
+          and t.user_id = :user_id
+          and t.del_flg != 1;
+        ';
+
+        $result = $db->selectOne($sql, [
+            ':topic_id' => $topic_id,
+            ':user_id' => $user->id,
+        ]);
+
+        return !empty($result) && $result['count'] != 0;
+    }
+
+    public static function update($topic): bool
+    {
+        $db = Auth::dbLogin();
+        $sql = 'update topics
+        set published = :published,
+        title = :title
+        where id = :id';
+
+        return $db->execute($sql, [
+            ':published' => $topic->published,
+            ':title' => $topic->title,
+            ':id' => $topic->id,
+        ]);
     }
 }

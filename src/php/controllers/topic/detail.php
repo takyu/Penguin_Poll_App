@@ -20,7 +20,7 @@ function get(): void
     $fetchd_topic = TopicQuery::fetchById($topic);
     $comments = CommentQuery::fetchByTopicId($topic);
 
-    if (!$fetchd_topic) {
+    if (empty($fetchd_topic) || $fetchd_topic->published != 1) {
         Msg::push(Msg::ERROR, 'トピックが見つかりません。');
         redirect('404');
     }
