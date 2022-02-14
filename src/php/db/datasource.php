@@ -4,6 +4,32 @@ namespace db;
 use PDO;
 use PDOStatement;
 
+/**
+ * Singleton pattern
+ *
+ * This pattern guarantees that there is only one instance.
+ * It has a static method to get the only instance,
+ * and it always returns the same instance.
+ */
+class PDOSingleton
+{
+    private static PDO $singleton;
+
+    private function __construct($dsn, $username, $password, $options)
+    {
+        $this->conn = new PDO($dsn, $username, $password, $options);
+    }
+
+    public static function getInstance($dsn, $username, $password, $options)
+    {
+        if (!isset(self::$singleton)) {
+            $instance = new PDOSingleton($dsn, $username, $password, $options);
+            self::$singleton = $instance->conn;
+        }
+        return self::$singleton;
+    }
+}
+
 interface IDataSource
 {
     // Execute
@@ -38,7 +64,12 @@ class DataSource implements IDataSource
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
-        $this->conn = new PDO($dsn, $username, $password, $options);
+        $this->conn = PDOSingleton::getInstance(
+            $dsn,
+            $username,
+            $password,
+            $options
+        );
     }
 
     public function executeSql(string $sql, array $params): PDOStatement|bool
