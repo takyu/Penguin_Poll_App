@@ -7,7 +7,7 @@ function get_param(
     string $key,
     ?string $default_val,
     bool $is_post = true
-): string {
+): ?string {
     $arry = $is_post ? $_POST : $_GET;
     return $arry[$key] ?? $default_val;
 }

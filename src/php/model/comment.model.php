@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace model;
 
+use lib\Msg;
+
 class CommentModel extends AbstractModel
 {
     public int $id;
     public int $topic_id;
     public int $agree;
-    public string $body;
+    public ?string $body;
     public string $user_id;
     public string $nickname;
     public int $del_flg;
@@ -52,7 +54,7 @@ class CommentModel extends AbstractModel
         }
         return true;
     }
-    
+
     /**
      * Check format of id
      */

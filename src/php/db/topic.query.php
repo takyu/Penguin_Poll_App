@@ -114,6 +114,7 @@ class TopicQuery
 
     public static function update($topic): bool
     {
+        // validate check
         if (
             !(
                 $topic->isValidId() *
@@ -139,6 +140,7 @@ class TopicQuery
 
     public static function insert($topic, $user)
     {
+        // validate check
         if (
             !(
                 $user->isValidId() *
@@ -159,5 +161,27 @@ class TopicQuery
             ':published' => $topic->published,
             ':user_id' => $user->id,
         ]);
+    }
+
+    public static function incrementLikesOrDislikes($comment): bool
+    {
+        // validate check
+        if (!($comment->isValidTopicId() * $comment->isValidAgree())) {
+            return false;
+        }
+
+        $db = Auth::dbLogin();
+
+        if ($comment->agree) {
+            $sql = 'update topics
+          set likes = likes + 1
+          where id = ?';
+        } else {
+            $sql = 'update topics
+          set dislikes = dislikes + 1
+          where id = ?';
+        }
+
+        return $db->execute($sql, [$comment->topic_id]);
     }
 }

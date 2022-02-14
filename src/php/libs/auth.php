@@ -8,6 +8,7 @@ use db\DataSource;
 use db\TopicQuery;
 use db\UserQuery;
 use model\UserModel;
+use lib\Msg;
 
 class Auth
 {

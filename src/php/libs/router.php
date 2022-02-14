@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace lib;
 
+use lib\Msg;
+
 function route(string $rpath, string $method): void
 {
     try {

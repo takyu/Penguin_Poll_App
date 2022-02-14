@@ -44,7 +44,7 @@ function header()
           <?php else: ?>
           <a href="<?php the_url(
               'register'
-          ); ?>" class="btn btn-primary me-2">登録</a>
+          ); ?>" class="btn btn-primary text-white me-2">登録</a>
           <a href="<?php the_url('login'); ?>">ログイン</a>
           <?php endif; ?>
         </div>

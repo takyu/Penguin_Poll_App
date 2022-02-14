@@ -13,7 +13,7 @@ function index($topic, $comments)
   <?php foreach ($comments as $comment): ?>
   <?php
   $agree_label = $comment->agree ? '賛成' : '反対';
-  $agree_cls = $comment->agreee ? 'bg-success' : 'bg-danger';
+  $agree_cls = $comment->agree ? 'bg-success' : 'bg-danger';
   ?>
   <li class="bg-white shadow-sm mb-3 rounded p-3">
     <h2 class="fs-4 mb-2">
