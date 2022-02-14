@@ -8,6 +8,8 @@ use function partials\topic_list_item;
 
 function index($topics)
 {
+    $topics = escape($topics);
+
     $topic = array_shift($topics);
     topic_header_item($topic, true);
     ?>

@@ -36,18 +36,19 @@ function get_url($path): string
     return BASE_CONTEXT_PATH . trim($path, '/');
 }
 
-function set_class_alert($type) {
-  switch ($type) {
-      case Msg::INFO:
-          return 'alert-primary';
-          break;
-      case Msg::ERROR:
-          return 'alert-danger';
-          break;
-      case Msg::DEBUG:
-          return 'alert-warning';
-          break;
-  }
+function set_class_alert($type)
+{
+    switch ($type) {
+        case Msg::INFO:
+            return 'alert-primary';
+            break;
+        case Msg::ERROR:
+            return 'alert-danger';
+            break;
+        case Msg::DEBUG:
+            return 'alert-warning';
+            break;
+    }
 }
 
 /**
@@ -63,4 +64,29 @@ function is_alnum($val): int|false
 function is_alnum_and_more_one_capital_alpha($val): int|false
 {
     return preg_match("/^(?=.*[A-Z])[a-zA-Z0-9]+$/", $val);
+}
+
+/**
+ * escape HTML
+ */
+function escape($data): array|object|string|int
+{
+    if (is_array($data)) {
+        foreach ($data as $prop => $val) {
+            $data[$prop] = escape($val);
+        }
+
+        return $data;
+    } elseif (is_object($data)) {
+        foreach ($data as $prop => $val) {
+            $data->$prop = escape($val);
+        }
+
+        return $data;
+    } else {
+        if (is_numeric($data)) {
+            return $data;
+        }
+        return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    }
 }

@@ -8,7 +8,10 @@ use function partials\topic_list_item;
 
 function index($topic, $comments)
 {
-    topic_header_item($topic, false); ?>
+    $comments = escape($comments);
+    $topic = escape($topic);
+    topic_header_item($topic, false);
+    ?>
 <ul class="list-unstyled pt-5">
   <?php foreach ($comments as $comment): ?>
   <?php
