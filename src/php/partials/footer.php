@@ -10,7 +10,7 @@ function footer() {
       <span class="text-muted"> &copy; Takyu</span>
     </footer>
   </div>
-  <script src="<?php echo BASE_JS_PATH; ?>main.js"></script>
+  <script src="<?php echo BASE_JS_PATH; ?>main.bundle.js"></script>
 </body>
 </html>
 <?php } ?>

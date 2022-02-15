@@ -25,8 +25,8 @@ function header()
 
 <body>
   <div id="container">
-    <header class="container my-2">
-      <nav class="row align-items-center py-2">
+    <header class="container mt-2">
+      <nav class="row align-items-center pt-2">
         <a href="<?php the_url(
             '/'
         ); ?>" class="col-md d-flex align-items-center mb-3 mb-md-0">

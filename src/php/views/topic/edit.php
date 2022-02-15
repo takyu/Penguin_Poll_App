@@ -7,12 +7,20 @@ function index($topic, $is_edit)
     ?>
 <h1 class="mb-3"><?php echo $header_title; ?></h1>
 <div class="bg-white p-4 shadow-sm mx-auto rounded">
-  <form action="<?php echo CURRENT_URI;?>" method="POST">
+  <form class="validate-form" action="<?php echo CURRENT_URI;?>" method="POST" autocomplete="off" novalidate>
     <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
     <div class="mb-3">
       <label for="Input-title" class="form-label">タイトル</label>
-      <input type="text" name="title" class="form-control bg-white" id="Input-title"
-        value="<?php echo $topic->title; ?>">
+      <input type="text"
+        name="title"
+        class="form-control bg-white validate-target"
+        id="Input-title"
+        value="<?php echo $topic->title; ?>"
+        required
+        maxlength="50"
+        autofocus
+      >
+      <div class="invalid-feedback"></div>
     </div>
     <div class="mb-3">
       <label for="published" class="form-label">ステータス</label>

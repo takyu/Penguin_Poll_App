@@ -1,9 +1,27 @@
 /**
  * Load vendor's style files
  */
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
  * Load style files
  */
 import '../assets/_sass/style.scss';
+
+/**
+ * Load vendor's js files
+ */
+
+/**
+ * Load js module files
+ */
+import { nodeOps } from './modules/nodeOps';
+import { pollChart } from './modules/pie-chart';
+import { validateForm } from './modules/form-validate';
+
+nodeOps.on(document, 'DOMContentLoaded', () => {
+  // draw chart
+  pollChart();
+
+  // enabled validate form
+  validateForm();
+});

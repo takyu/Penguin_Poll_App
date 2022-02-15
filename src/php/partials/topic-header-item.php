@@ -7,15 +7,15 @@ function topic_header_item($topic, $from_top_page)
 {
     ?>
 
-<div class="row">
+<div class="row my-3">
 
   <!-- left side chart -->
-  <div class="col">
+  <div class="col my-2">
     <?php chart($topic); ?>
   </div>
 
   <!-- right side content -->
-  <div class="col my-5">
+  <div class="col my-2">
     <?php topic_main($topic, $from_top_page); ?>
     <?php comment_form($topic); ?>
   </div>
@@ -29,13 +29,8 @@ function chart($topic)
 {
     ?>
 
-<canvas id="chart" width="400" height="450" data-likes="<?php echo $topic->likes; ?>"
+<canvas id="chart" width="400" height="400" data-likes="<?php echo $topic->likes; ?>"
   data-dislikes="<?php echo $topic->dislikes; ?>"></canvas>
-<style>
-#chart {
-  background-color: aqua;
-}
-</style>
 
 <?php
 }
@@ -82,17 +77,17 @@ function comment_form($topic)
     ?>
 
 <?php if (Auth::isLogin()): ?>
-<form action="<?php the_url('topic/detail'); ?>" method="POST">
+<form class="validate-form" action="<?php the_url('topic/detail'); ?>" method="POST" autocomplete="off" novalidate>
   <span class="fs-4">あなたは賛成？それとも反対？</span>
   <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
   <div class="mb-2">
-    <textarea class="form-control bg-white" name="body" id="floatingTextarea" style="height: 90px"></textarea>
+    <textarea class="form-control bg-white" name="body" id="floatingTextarea" style="height: 90px" maxlength="100"></textarea>
   </div>
   <div class="container">
     <div class="row fs-4">
       <div class="col-auto d-flex align-items-center ps-0">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" id="agree" name="inlineRadioOptions" value="1" checked>
+          <input class="form-check-input" type="radio" id="agree" name="inlineRadioOptions" value="1" required checked>
           <label class="form-check-label" for="agree">賛成</label>
         </div>
         <div class="form-check form-check-inline">

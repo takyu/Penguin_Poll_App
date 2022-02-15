@@ -17,5 +17,5 @@ define('GO_HOME', 'home');
 define('GO_REFERER', 'referer');
 
 // Switching the DEBUGMODE
-define('DEBUG', true);
-// define('DEBUG', false);
+// define('DEBUG', true);
+define('DEBUG', false);

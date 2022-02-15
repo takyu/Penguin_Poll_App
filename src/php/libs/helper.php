@@ -36,7 +36,7 @@ function get_url($path): string
     return BASE_CONTEXT_PATH . trim($path, '/');
 }
 
-function set_class_alert($type)
+function set_class_alert($type): string
 {
     switch ($type) {
         case Msg::INFO:
@@ -54,7 +54,7 @@ function set_class_alert($type)
 /**
  * format check function
  *
- * @return bool
+ * @return bool|int
  */
 function is_alnum($val): int|false
 {
@@ -67,7 +67,7 @@ function is_alnum_and_more_one_capital_alpha($val): int|false
 }
 
 /**
- * escape HTML
+ * escape of HTML
  */
 function escape($data): array|object|string|int
 {

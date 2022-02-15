@@ -33,6 +33,13 @@ class UserModel extends AbstractModel
         } else {
             $invalid_fmt_flg = 0;
 
+            if (strlen($val) < 4) {
+              Msg::push(
+                    Msg::ERROR,
+                    ' ユーザーIDは4桁以上で入力してください。'
+                );
+                $invalid_fmt_flg = 1;
+            }
             if (strlen($val) > 15) {
                 Msg::push(
                     Msg::ERROR,
@@ -66,10 +73,10 @@ class UserModel extends AbstractModel
         } else {
           $invalid_fmt_flg = 0;
 
-            if (strlen($val) < 6) {
+            if (strlen($val) < 8) {
                 Msg::push(
                     Msg::ERROR,
-                    'パスワードは6桁以上で入力してください。'
+                    'パスワードは8桁以上で入力してください。'
                 );
                 $invalid_fmt_flg = 1;
             }
