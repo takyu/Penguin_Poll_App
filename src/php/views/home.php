@@ -13,7 +13,7 @@ function index(array $topics): void
     $topic = array_shift($topics);
     topic_header_item($topic, true);
     ?>
-<ul class="container">
+<ul class="container my-5">
   <?php foreach ($topics as $topic) {
       // URL to edit display for each post
       $url = get_url('topic/detail?topic_id=' . $topic->id);
