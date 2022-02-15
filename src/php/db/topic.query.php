@@ -9,7 +9,7 @@ use model\TopicModel;
 
 class TopicQuery
 {
-    public static function fetchByUserId($user): bool|array
+    public static function fetchByUserId(object $user): bool|array
     {
         if (!$user->isValidId()) {
             return false;
@@ -47,7 +47,7 @@ class TopicQuery
         return $result;
     }
 
-    public static function fetchById($topic): bool|object
+    public static function fetchById(object $topic): bool|object
     {
         if (!$topic->isValidId()) {
             return false;
@@ -74,7 +74,7 @@ class TopicQuery
         return $result;
     }
 
-    public static function incrementViewCount($topic): bool
+    public static function incrementViewCount(object $topic): bool
     {
         if (!$topic->isValidId()) {
             return false;
@@ -90,7 +90,7 @@ class TopicQuery
         return $db->execute($sql, [$topic->id]);
     }
 
-    public static function isUserOwnTopic($topic_id, $user): bool
+    public static function isUserOwnTopic(int $topic_id, object $user): bool
     {
         if (!(TopicModel::validateId($topic_id) && $user->isValidId())) {
             return false;
@@ -112,7 +112,7 @@ class TopicQuery
         return !empty($result) && $result['count'] != 0;
     }
 
-    public static function update($topic): bool
+    public static function update(object $topic): bool
     {
         // validate check
         if (
@@ -138,7 +138,7 @@ class TopicQuery
         ]);
     }
 
-    public static function insert($topic, $user)
+    public static function insert(object $topic, object $user): bool
     {
         // validate check
         if (
@@ -163,7 +163,7 @@ class TopicQuery
         ]);
     }
 
-    public static function incrementLikesOrDislikes($comment): bool
+    public static function incrementLikesOrDislikes(object $comment): bool
     {
         // validate check
         if (!($comment->isValidTopicId() * $comment->isValidAgree())) {

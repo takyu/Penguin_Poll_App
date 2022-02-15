@@ -9,7 +9,7 @@ use model\TopicModel;
 
 use function view\topic\edit\index;
 
-function get()
+function get(): void
 {
     Auth::requireLogin();
 
@@ -36,7 +36,7 @@ function get()
     index($fetchedTopic, true);
 }
 
-function post()
+function post(): void
 {
     Auth::requireLogin();
 

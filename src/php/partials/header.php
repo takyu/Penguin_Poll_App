@@ -5,7 +5,7 @@ namespace partials;
 use lib\Auth;
 use lib\Msg;
 
-function header()
+function header(): void
 {
     ?>
 

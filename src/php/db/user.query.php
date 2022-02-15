@@ -26,6 +26,8 @@ class UserQuery
             UserModel::class
         );
 
+        gettype(DataSource::CLS);
+
         return $result;
     }
 

@@ -15,13 +15,21 @@ class PDOSingleton
 {
     private static PDO $singleton;
 
-    private function __construct($dsn, $username, $password, $options)
-    {
+    private function __construct(
+        string $dsn,
+        string $username,
+        string $password,
+        array $options
+    ) {
         $this->conn = new PDO($dsn, $username, $password, $options);
     }
 
-    public static function getInstance($dsn, $username, $password, $options)
-    {
+    public static function getInstance(
+        string $dsn,
+        string $username,
+        string $password,
+        array $options
+    ): PDO {
         if (!isset(self::$singleton)) {
             $instance = new PDOSingleton($dsn, $username, $password, $options);
             self::$singleton = $instance->conn;
@@ -36,8 +44,18 @@ interface IDataSource
     public function execute(string $sql, array $params): bool;
 
     // Fetch
-    public function select(string $sql, array $params): array;
-    public function selectOne(string $sql, array $params): object|array|bool;
+    public function select(
+        string $sql,
+        array $params,
+        $type = '',
+        string $cls = ''
+    ): array;
+    public function selectOne(
+        string $sql,
+        array $params,
+        $type = '',
+        string $cls = ''
+    ): object|array|bool;
 
     // Transaction
     public function begin(): void;
@@ -91,7 +109,7 @@ class DataSource implements IDataSource
         string $sql = '',
         array $params = [],
         $type = '',
-        $cls = ''
+        string $cls = ''
     ): array {
         $stmt = $this->executeSql($sql, $params);
         if ($type === static::CLS) {
@@ -103,10 +121,11 @@ class DataSource implements IDataSource
         string $sql = '',
         array $params = [],
         $type = '',
-        $cls = ''
+        string $cls = ''
     ): object|array|bool {
         $result = $this->select($sql, $params, $type, $cls);
-        //var_dump($result[0]);
+        // var_dump($type);
+        gettype($type);
         return count($result) > 0 ? $result[0] : false;
     }
 

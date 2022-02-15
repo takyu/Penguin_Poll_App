@@ -1,7 +1,7 @@
 <?php
 namespace view\login;
 
-function index()
+function index(): void
 {
     ?>
 <h1 class="visually-hidden">ログイン</h1>

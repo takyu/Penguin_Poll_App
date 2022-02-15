@@ -1,8 +1,9 @@
-<?php 
+<?php
 namespace view\register;
 
-function index() {
-?>
+function index(): void
+{
+    ?>
 <h1 class="visually-hidden">アカウント登録</h1>
 <div class="mt-5">
   <div class="text-center mb-4">
@@ -67,4 +68,5 @@ function index() {
     </form>
   </div>
 </div>
-<?php } ?>
+<?php
+} ?>

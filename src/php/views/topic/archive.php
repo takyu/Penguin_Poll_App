@@ -3,7 +3,7 @@ namespace view\topic\archive;
 
 use function partials\topic_list_item;
 
-function index($topics)
+function index(array $topics): void
 {
     $topics = escape($topics); ?>
 <h1 class="h2 mb-3"></h1>

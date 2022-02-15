@@ -147,12 +147,12 @@ class Auth
         }
     }
 
-    public static function hasPermission($topic_id, $user)
+    public static function hasPermission(int $topic_id, object $user): bool
     {
         return TopicQuery::isUserOwnTopic($topic_id, $user);
     }
 
-    public static function requirePermission($topic_id, $user)
+    public static function requirePermission(int $topic_id, object $user): void
     {
         if (!static::hasPermission($topic_id, $user)) {
             Msg::push(

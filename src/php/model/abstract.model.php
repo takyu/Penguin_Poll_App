@@ -7,7 +7,7 @@ abstract class AbstractModel
 {
     protected static string|null $SESSION_NAME = null;
 
-    public static function setSession($val): void
+    public static function setSession(mixed $val): void
     {
         if (empty(static::$SESSION_NAME)) {
             throw new Error('Error: Specify $SESSION_NAME.');

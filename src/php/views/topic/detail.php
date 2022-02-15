@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace view\topic\detail;
 
 use function partials\topic_header_item;
-use function partials\topic_list_item;
 
-function index($topic, $comments)
+function index(object $topic, array $comments): void
 {
     $comments = escape($comments);
     $topic = escape($topic);

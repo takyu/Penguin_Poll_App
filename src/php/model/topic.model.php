@@ -30,7 +30,7 @@ class TopicModel extends AbstractModel
     {
         return static::validateId($this->id);
     }
-    public static function validateId($val): bool
+    public static function validateId(int $val): bool
     {
         if (empty($val) || !is_numeric($val)) {
             Msg::push(Msg::ERROR, 'パラメーターが不正です。');
@@ -46,7 +46,7 @@ class TopicModel extends AbstractModel
     {
         return static::validateTitle($this->title);
     }
-    public static function validateTitle($val): bool
+    public static function validateTitle(string $val): bool
     {
         if (empty($val)) {
             Msg::push(Msg::ERROR, 'タイトルを入力してください。');
@@ -65,12 +65,12 @@ class TopicModel extends AbstractModel
     {
         return static::validatePublished($this->published);
     }
-    public static function validatePublished($val): bool
+    public static function validatePublished(int $val): bool
     {
         if (!isset($val)) {
             Msg::push(Msg::ERROR, '公開もしくは非公開を選択してください。');
             return false;
-        } elseif (!($val == 0 || $val == 1)) {
+        } elseif (!($val === 0 || $val === 1)) {
             Msg::push(Msg::ERROR, '公開ステータスが不正です。');
             return false;
         }

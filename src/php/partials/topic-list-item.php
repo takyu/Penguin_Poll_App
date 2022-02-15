@@ -1,7 +1,7 @@
 <?php
 namespace partials;
 
-function topic_list_item($topic, $title_url, $with_status)
+function topic_list_item(object $topic, string $title_url, bool $with_status): void
 {
   $published_label = $topic->published ? '公開' : '非公開';
   $published_cls = $topic->published ? 'bg-primary' : 'bg-danger';

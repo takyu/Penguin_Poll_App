@@ -1,7 +1,7 @@
 <?php
 namespace view\topic\edit;
 
-function index($topic, $is_edit)
+function index(object $topic, bool $is_edit): void
 {
   $header_title = $is_edit ? 'トピックの編集' : 'トピックの作成';
     ?>

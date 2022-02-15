@@ -6,7 +6,7 @@ namespace view\home;
 use function partials\topic_header_item;
 use function partials\topic_list_item;
 
-function index($topics)
+function index(array $topics): void
 {
     $topics = escape($topics);
 

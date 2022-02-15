@@ -8,7 +8,7 @@ use model\CommentModel;
 
 class CommentQuery
 {
-    public static function fetchByTopicId($topic): bool|array
+    public static function fetchByTopicId(object $topic): bool|array
     {
         if (!$topic->isValidId()) {
             return false;
@@ -35,7 +35,7 @@ class CommentQuery
         return $result;
     }
 
-    public static function insert($comment)
+    public static function insert(object $comment): bool
     {
         // validate check
         if (

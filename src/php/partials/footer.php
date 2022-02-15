@@ -2,7 +2,7 @@
 
 namespace partials;
 
-function footer() {
+function footer(): void {
 
 ?>
 </main>

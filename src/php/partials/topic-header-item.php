@@ -3,7 +3,7 @@ namespace partials;
 
 use lib\Auth;
 
-function topic_header_item($topic, $from_top_page)
+function topic_header_item(object $topic, bool $from_top_page): void
 {
     ?>
 
@@ -25,7 +25,7 @@ function topic_header_item($topic, $from_top_page)
 <?php
 }
 
-function chart($topic)
+function chart(object $topic): void
 {
     ?>
 
@@ -35,7 +35,7 @@ function chart($topic)
 <?php
 }
 
-function topic_main($topic, $from_top_page)
+function topic_main(object $topic, bool $from_top_page): void
 {
     ?>
 
@@ -72,7 +72,7 @@ function topic_main($topic, $from_top_page)
 <?php
 }
 
-function comment_form($topic)
+function comment_form(object $topic): void
 {
     ?>
 

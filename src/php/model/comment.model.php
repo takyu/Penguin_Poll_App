@@ -24,11 +24,11 @@ class CommentModel extends AbstractModel
     {
         return static::validateAgree($this->agree);
     }
-    public static function validateAgree($val): bool
+    public static function validateAgree(int $val): bool
     {
         if (!isset($val)) {
             Msg::push(Msg::ERROR, '賛成もしくは反対を選択してください。');
-            if (!($val == 0 || $val == 1)) {
+            if (!($val === 0 || $val === 1)) {
                 Msg::push(
                     Msg::ERROR,
                     '賛成か反対、どちらかの値を選択してください。'
@@ -46,7 +46,7 @@ class CommentModel extends AbstractModel
     {
         return static::validateBody($this->body);
     }
-    public static function validateBody($val): bool
+    public static function validateBody(string $val): bool
     {
         if (mb_strlen($val) > 100) {
             Msg::push(Msg::ERROR, 'コメントは100文字以内で入力してください。');
