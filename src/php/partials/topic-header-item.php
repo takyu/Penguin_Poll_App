@@ -7,7 +7,7 @@ function topic_header_item(object $topic, bool $from_top_page): void
 {
     ?>
 
-<div class="row my-2">
+<div class="row align-items-center my-3">
 
   <!-- left side chart -->
   <div class="col my-2">
@@ -31,8 +31,8 @@ function chart(object $topic): void
 
 <canvas
   id="chart"
-  width="500"
-  height="500"
+  width="400"
+  height="400"
   data-likes="<?php echo $topic->likes; ?>"
   data-dislikes="<?php echo $topic->dislikes; ?>"
   data-neither="<?php echo $topic->neither; ?>"
@@ -93,7 +93,7 @@ function comment_form(object $topic): void
   <span class="fs-4">あなたは賛成？反対？決めかねる、？</span>
   <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
   <div class="mb-2">
-    <textarea class="form-control bg-white" name="body" id="floatingTextarea" style="height: 90px" maxlength="100"></textarea>
+    <textarea class="form-control bg-white" name="body" id="floatingTextarea" style="height: 100px" maxlength="100"></textarea>
   </div>
   <div class="container">
     <div class="row fs-4">
@@ -117,7 +117,7 @@ function comment_form(object $topic): void
 </form>
 </div>
 <?php else: ?>
-<div class="text-center mt-5">
+<div class="text-center mb-5">
   <div class="mb-2">ログインしてアンケートに参加してね！</div>
   <a href="<?php the_url(
       'login'
