@@ -12,6 +12,7 @@ class TopicModel extends AbstractModel
     public int $published;
     public int $views;
     public int $likes;
+    public int $neither;
     public int $dislikes;
     public string $user_id;
     public string $nickname;

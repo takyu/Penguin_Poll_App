@@ -12,7 +12,7 @@ export function pollChart() {
 
   const count_likes = $chart.dataset.likes;
   const count_dislikes = $chart.dataset.dislikes;
-  // const count_nei = $chart.dataset.neither;
+  const count_nei = $chart.dataset.neither;
 
   let data;
 
@@ -28,12 +28,11 @@ export function pollChart() {
     };
   } else {
     data = {
-      labels: ['賛成', '反対'],
+      labels: ['賛成', '反対', '決めかねる'],
       datasets: [
         {
-          data: [count_likes, count_dislikes],
-          // backgroundColor: ['#34d399', '#f87171', '#dcdcdc'],
-          backgroundColor: ['#34d399', '#f87171'],
+          data: [count_likes, count_dislikes, count_nei],
+          backgroundColor: ['#34d399', '#f87171', '#dcdcdc'],
         },
       ],
     };
@@ -46,7 +45,7 @@ export function pollChart() {
       plugins: {
         title: {
           display: true,
-          text: '賛成？反対？',
+          text: '賛成？反対？決めかねる？',
         },
         legend: {
           position: 'bottom',

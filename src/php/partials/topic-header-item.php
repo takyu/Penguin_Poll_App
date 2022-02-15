@@ -7,7 +7,7 @@ function topic_header_item(object $topic, bool $from_top_page): void
 {
     ?>
 
-<div class="row my-3">
+<div class="row my-2">
 
   <!-- left side chart -->
   <div class="col my-2">
@@ -29,8 +29,14 @@ function chart(object $topic): void
 {
     ?>
 
-<canvas id="chart" width="400" height="400" data-likes="<?php echo $topic->likes; ?>"
-  data-dislikes="<?php echo $topic->dislikes; ?>"></canvas>
+<canvas
+  id="chart"
+  width="500"
+  height="500"
+  data-likes="<?php echo $topic->likes; ?>"
+  data-dislikes="<?php echo $topic->dislikes; ?>"
+  data-neither="<?php echo $topic->neither; ?>"
+></canvas>
 
 <?php
 }
@@ -66,6 +72,10 @@ function topic_main(object $topic, bool $from_top_page): void
       <div class="display-1"><?php echo $topic->dislikes; ?></div>
       <div class="fs-4 mb-0">反対</div>
     </div>
+    <div class="neither col-auto">
+      <div class="display-1"><?php echo $topic->neither; ?></div>
+      <div class="fs-4 mb-0">決めかねる</div>
+    </div>
   </div>
 </div>
 
@@ -77,15 +87,17 @@ function comment_form(object $topic): void
     ?>
 
 <?php if (Auth::isLogin()): ?>
-<form class="validate-form" action="<?php the_url('topic/detail'); ?>" method="POST" autocomplete="off" novalidate>
-  <span class="fs-4">あなたは賛成？それとも反対？</span>
+<form class="validate-form" action="<?php the_url(
+    'topic/detail'
+); ?>" method="POST" autocomplete="off" novalidate>
+  <span class="fs-4">あなたは賛成？反対？決めかねる、？</span>
   <input type="hidden" name="topic_id" value="<?php echo $topic->id; ?>">
   <div class="mb-2">
     <textarea class="form-control bg-white" name="body" id="floatingTextarea" style="height: 90px" maxlength="100"></textarea>
   </div>
   <div class="container">
     <div class="row fs-4">
-      <div class="col-auto d-flex align-items-center ps-0">
+      <div class="col-auto d-flex justify-content-center align-items-center ps-0">
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" id="agree" name="inlineRadioOptions" value="1" required checked>
           <label class="form-check-label" for="agree">賛成</label>
@@ -94,8 +106,12 @@ function comment_form(object $topic): void
           <input class="form-check-input" type="radio" id="disagree" name="inlineRadioOptions" value="0">
           <label class="form-check-label" for="disagree">反対</label>
         </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="disagree" name="inlineRadioOptions" value="2">
+          <label class="form-check-label" for="disagree">決めかねる</label>
+        </div>
       </div>
-      <input type="submit" value="送信" class="col btn btn-success shadow-sm">
+      <input type="submit" value="送信" class="my-2 col btn btn-success shadow-sm">
     </div>
   </div>
 </form>

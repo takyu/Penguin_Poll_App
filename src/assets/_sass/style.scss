@@ -1,4 +1,4 @@
-$body-bg: #afeeee80;;
+$body-bg: #afeeee80;
 $body-color: #6b7280;
 $font-size-base: 0.9rem;
 $input-btn-padding-x: 1.3rem;
@@ -11,6 +11,7 @@ $font-family-base: 'M PLUS Rounded 1c', sans-serif;
 
 $cLikesGreen: #33d499;
 $cDislikesRed: #f87171;
+$cNeither: #a9a9a9;
 
 .login-form {
   width: 300px;
@@ -34,7 +35,6 @@ a {
   &:hover {
     @extend .shadow;
   }
-
 }
 
 .likes-green {
@@ -43,4 +43,8 @@ a {
 
 .dislikes-red {
   color: $cDislikesRed;
+}
+
+.neither {
+  color: $cNeither;
 }

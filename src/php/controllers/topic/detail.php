@@ -50,7 +50,7 @@ function post(): void
         $db->begin();
 
         // insert topics table
-        $is_success = TopicQuery::incrementLikesOrDislikes($comment);
+        $is_success = TopicQuery::incrementLikesOrDislikesOrNeither($comment);
         if ($is_success && !empty($comment->body)) {
             // insert comments table
             $is_success = CommentQuery::insert($comment);

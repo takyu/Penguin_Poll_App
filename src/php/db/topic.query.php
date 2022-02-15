@@ -163,7 +163,7 @@ class TopicQuery
         ]);
     }
 
-    public static function incrementLikesOrDislikes(object $comment): bool
+    public static function incrementLikesOrDislikesOrNeither(object $comment): bool
     {
         // validate check
         if (!($comment->isValidTopicId() * $comment->isValidAgree())) {
@@ -172,13 +172,17 @@ class TopicQuery
 
         $db = Auth::dbLogin();
 
-        if ($comment->agree) {
+        if ($comment->agree === 1) {
             $sql = 'update topics
           set likes = likes + 1
           where id = ?';
-        } else {
+        } elseif ($comment->agree === 0) {
             $sql = 'update topics
           set dislikes = dislikes + 1
+          where id = ?';
+        } elseif ($comment->agree === 2) {
+            $sql = 'update topics
+          set neither = neither + 1
           where id = ?';
         }
 

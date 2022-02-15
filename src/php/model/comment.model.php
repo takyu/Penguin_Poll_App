@@ -27,11 +27,11 @@ class CommentModel extends AbstractModel
     public static function validateAgree(int $val): bool
     {
         if (!isset($val)) {
-            Msg::push(Msg::ERROR, '賛成もしくは反対を選択してください。');
-            if (!($val === 0 || $val === 1)) {
+            Msg::push(Msg::ERROR, '賛成、反対もしくは決めかねるを選択してください。');
+            if (!($val === 0 || $val === 1 || $val === 2)) {
                 Msg::push(
                     Msg::ERROR,
-                    '賛成か反対、どちらかの値を選択してください。'
+                    '賛成反対、もしくは決めかねるにチェックしてください。'
                 );
             }
             return false;
