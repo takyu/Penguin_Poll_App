@@ -28,7 +28,7 @@ function index(): void
         >
         <div class="invalid-feedback"></div>
       </div>
-      <div class="mb-3">
+      <div class="mb-1">
         <label for="Input-pass" class="form-label">パスワード</label>
         <input
           type="password"
@@ -42,6 +42,10 @@ function index(): void
           tabindex="2"
         >
         <div class="invalid-feedback"></div>
+      </div>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input bg-white" type="checkbox" role="switch" id="checkbox-pass">
+        <label class="form-check-label" for="checkboxpass">パスワードの表示</label>
       </div>
       <div class="mb-3">
         <label for="Input-nickname" class="form-label">ニックネーム</label>

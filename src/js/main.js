@@ -17,6 +17,7 @@ import '../assets/_sass/style.scss';
 import { nodeOps } from './modules/nodeOps';
 import { pollChart } from './modules/pie-chart';
 import { validateForm } from './modules/form-validate';
+import { toggleDisplayPass } from './modules/toggle-display-pass';
 
 nodeOps.on(document, 'DOMContentLoaded', () => {
   // draw chart
@@ -24,4 +25,7 @@ nodeOps.on(document, 'DOMContentLoaded', () => {
 
   // enabled validate form
   validateForm();
+
+  // toggle to display password
+  toggleDisplayPass();
 });

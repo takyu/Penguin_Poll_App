@@ -18,7 +18,7 @@ function get(): void
 
     $topics = TopicQuery::fetchByUserId($user);
 
-    if (!$topics) {
+    if ($topics === false) {
         Msg::push(Msg::ERROR, 'ログインしてください。');
         redirect('login');
     }
@@ -26,6 +26,6 @@ function get(): void
     if (count($topics) > 0) {
         index($topics);
     } else {
-        echo '<div class="alert alert-danger" role="alert">トピックを投稿しよう！</div>';
+        echo '<div class="alert alert-primary" role="alert">トピックを投稿してみよう！</div>';
     }
 }

@@ -59,9 +59,12 @@ function post(): void
         Msg::push(Msg::DEBUG, $th->getMessage());
         $is_success = false;
     } finally {
-        if ($is_success) {
+        if ($is_success && $comment->body == "") {
             $db->commit();
-            Msg::push(Msg::INFO, 'コメントの登録に成功しました。');
+            Msg::push(Msg::INFO, '投票しました。');
+        } elseif ($is_success) {
+            $db->commit();
+            Msg::push(Msg::INFO, '投票とコメントの登録に成功しました。');
         } else {
             $db->rollback();
             Msg::push(Msg::ERROR, 'コメントの登録に失敗しました。');

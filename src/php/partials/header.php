@@ -19,7 +19,7 @@ function header(): void
   <title>ペンギンについてのアンケート</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="//fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo BASE_CSS_PATH; ?>style.css">
 </head>
 
@@ -35,11 +35,15 @@ function header(): void
         </a>
         <div class="col-md-auto">
           <?php if (Auth::isLogin()): ?>
-          <?php // Display when user is logined ?>
+          <?php
+              // Display when user is logined
+              ?>
           <a href="<?php the_url(
-                'topic/create'
-            ); ?>" class="btn btn-primary text-white me-2">投稿</a>
-          <a href="<?php the_url('topic/archive'); ?>" class="me-2">過去の投稿</a>
+              'topic/create'
+          ); ?>" class="btn btn-primary text-white me-2">投稿</a>
+          <a href="<?php the_url(
+              'topic/archive'
+          ); ?>" class="me-2">過去の投稿</a>
           <a href="<?php the_url('logout'); ?>">ログアウト</a>
           <?php else: ?>
           <a href="<?php the_url(
@@ -52,15 +56,15 @@ function header(): void
     </header>
     <main class="container py-3">
       <?php
-Msg::flush();
+      Msg::flush();
 
-if (DEBUG) {
-    if (Auth::isLogin()) {
-        echo "<div class='alert alert-secondary'>You are logged in.</div>";
-    } else {
-        echo "<div class='alert alert-secondary'>You are not logged in.</div>";
-    }
-}
+      if (DEBUG) {
+          if (Auth::isLogin()) {
+              echo "<div class='alert alert-secondary'>You are logged in.</div>";
+          } else {
+              echo "<div class='alert alert-secondary'>You are not logged in.</div>";
+          }
+      }
 } // header()
 
 ?>

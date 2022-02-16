@@ -5,6 +5,8 @@ $input-btn-padding-x: 1.3rem;
 $input-btn-padding-x-lg: 1.2rem;
 $primary: #3882f6;
 $danger: #ff4136;
+
+// @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap');
 $font-family-base: 'M PLUS Rounded 1c', sans-serif;
 
 @import '~bootstrap/scss/bootstrap';
@@ -19,6 +21,10 @@ $cNeither: #a9a9a9;
 
 .min-w-100 {
   min-width: 100px;
+}
+
+.min-w-70 {
+  min-width: 70px;
 }
 
 a {

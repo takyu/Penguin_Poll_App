@@ -31,13 +31,13 @@ export function validateForm() {
       }
 
       if ($target.checkValidity()) {
-        $target.classList.add('is-valid');
-        $target.classList.remove('is-invalid');
-
+        nodeOps.clta($target, 'is-valid');
+        nodeOps.cltr($target, 'is-invalid');
+        
         $feedback.textContent = '';
       } else {
-        $target.classList.add('is-invalid');
-        $target.classList.remove('is-valid');
+        nodeOps.clta($target, 'is-invalid');
+        nodeOps.cltr($target, 'is-valid');
 
         if ($target.validity.valueMissing) {
           $feedback.textContent = '値の入力が必須です。';
