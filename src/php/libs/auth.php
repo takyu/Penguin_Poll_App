@@ -55,7 +55,7 @@ class Auth
             Msg::push(Msg::DEBUG, $th->getMessage());
             Msg::push(
                 Msg::ERROR,
-                "In the login process, an error has occurred.\nPlease give it some time and then try to access it again."
+                "少し経ってからもう一度アクセスをお願いします。"
             );
         }
         return $is_success;
@@ -98,7 +98,7 @@ class Auth
             Msg::push(Msg::DEBUG, $th->getMessage());
             Msg::push(
                 Msg::ERROR,
-                "In the regist process, an error has occurred.\nPlease give it some time and then try to access it again."
+                "少し経ってからもう一度アクセスをお願いします。"
             );
         }
         return $is_success;
@@ -117,7 +117,7 @@ class Auth
             Msg::push(Msg::DEBUG, $th->getMessage());
             Msg::push(
                 Msg::ERROR,
-                "An error has occurred.\nPlease login again."
+                "エラーが発生しました。もう一度ログインしてください。"
             );
             return false;
         }

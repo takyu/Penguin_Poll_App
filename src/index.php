@@ -66,7 +66,6 @@ use function partials\header;
 use function partials\footer;
 use function lib\route;
 
-
 try {
     header();
 
@@ -74,11 +73,10 @@ try {
 
     $rpath = str_replace(BASE_CONTEXT_PATH, '', $url['path']);
     $method = strtolower($_SERVER['REQUEST_METHOD']);
-    
+
     route($rpath, $method);
 
     footer();
 } catch (\Throwable $th) {
-  var_dump($th);
-    die('<h1>What?? An error has occured in index.php</h1>');
+    die('<h1>予期せぬエラーが発生しました。</h1>');
 }

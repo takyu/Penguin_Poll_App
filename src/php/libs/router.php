@@ -29,7 +29,6 @@ function route(string $rpath, string $method): void
 
         $fn();
     } catch (\Throwable $th) {
-        var_dump($th);
         Msg::push(Msg::DEBUG, $th->getMessage());
         Msg::push(Msg::ERROR, 'Oops, Something is wrong!');
         redirect('404');
